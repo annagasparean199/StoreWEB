@@ -1,0 +1,54 @@
+.my-orders {
+  max-width: 45%;
+  margin: 0 auto;
+  min-height: 70vh;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.col-sm-2 {
+  flex: 1;
+  text-align: center;
+}
+
+.order-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-button {
+  font-size: 16px;
+  color: #fff;
+  background-color: #880000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #555555;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .col-sm-2 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

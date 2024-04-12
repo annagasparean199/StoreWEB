@@ -1,0 +1,40 @@
+<nav class="nav">
+  <h1><a routerLink="">Echo Vintage</a> </h1>
+  <div class="header-menu">
+    <div [ngSwitch]="menuType">
+      <ul *ngSwitchCase="'default'" >
+        <li><a routerLink="seller-auth">Seller</a></li>
+        <li><a routerLink="">Homepage</a></li>
+<!--        <li><a (click)=logout()>Homepage</a></li>-->
+        <li><a routerLink="register_login" class="nav-button">Register/Login</a></li>
+        <li><a *ngIf="menuType!=='seller'" (click)="toggleSearch()">Search</a></li>
+
+        <li><a routerLink="cart-page" >Cart({{cartItems}})</a></li>
+      </ul>
+      <ul *ngSwitchCase="'user'" >
+        <li><a>{{userName | titlecase}}</a></li>
+        <li><a routerLink="my-orders" >My Orders</a></li>
+        <li><a (click)="userLogout()" >Logout</a></li>
+        <li><a *ngIf="menuType!=='seller'" (click)="toggleSearch()">Search</a></li>
+
+        <li><a [routerLink]="cartItems>0?'cart-page':null">Cart({{cartItems}})</a></li>
+      </ul>
+      <ul *ngSwitchCase="'seller'" >
+        <li><a>{{sellerName | titlecase}}</a></li>
+        <li><a routerLink="seller-add-product">Add Product</a></li>
+        <li><a routerLink="seller-home">List</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+        <li><a *ngIf="menuType=='seller'" (click)="toggleSearch()">Search</a></li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="showSearch" class="search-bar">
+    <input type="text"
+           #searchInput (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search" />
+    <button (click)="submitSearch(searchInput.value)" >Search</button>
+    <ul class="search-bar" *ngIf="searchResult">
+      <li *ngFor="let item of searchResult">
+        <a (mousedown)="redirectToDetails(item.id)" >{{item.name}}</a>
+      </li>
+    </ul></div>
+</nav>
