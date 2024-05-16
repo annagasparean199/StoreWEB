@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {product, signUp, signUpSeller} from '../data-type';
-import { ProductService } from '../services/product.service';
+import {ProductService} from '../services/product.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,12 +10,15 @@ import { ProductService } from '../services/product.service';
 })
 export class HeaderComponent implements OnInit {
   menuType: string = 'default';
-  sellerName:string="";
-  userName:string="";
-  searchResult:undefined|product[];
-  cartItems=0;
+  sellerName: string = "";
+  userName: string = "";
+  searchResult: undefined | product[];
+  cartItems = 0;
   showSearch: boolean = false;
-  constructor(private route: Router, private product:ProductService) {}
+
+  constructor(private route: Router, private product: ProductService) {
+  }
+
   ngOnInit(): void {
     this.route.events.subscribe((val: any) => {
       if (val.url) {
@@ -52,29 +56,31 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('seller');
     this.route.navigate(['/']);
     this.product.cartData.emit([]);
-    this.cartItems=0;
+    this.cartItems = 0;
+    localStorage.clear();
   }
 
-  userLogout(){
+  userLogout() {
     localStorage.removeItem('user');
     this.route.navigate(['/register_login']);
     this.product.cartData.emit([]);
-    this.cartItems=0;
+    this.cartItems = 0;
+    localStorage.clear();
   }
 
-  searchProduct(query:KeyboardEvent){
-    if(query){
+  searchProduct(query: KeyboardEvent) {
+    if (query) {
       const element = query.target as HTMLInputElement;
-      this.product.searchProduct(element.value).subscribe((result)=>{
+      this.product.searchProduct(element.value).subscribe((result) => {
 
-        if(result.length>5){
-          result.length=length;
+        if (result.length > 5) {
+          result.length = length;
         }
-        this.searchResult=result;
+        this.searchResult = result;
       })
     }
   }
@@ -83,19 +89,21 @@ export class HeaderComponent implements OnInit {
     this.showSearch = !this.showSearch;
   }
 
-  hideSearch(){
-    this.searchResult=undefined;
+  hideSearch() {
+    this.searchResult = undefined;
   }
-  redirectToDetails(id:number){
+
+  redirectToDetails(id: number) {
     this.route.navigate(['/details/' + id]);
   }
-  submitSearch(val:string){
+
+  submitSearch(val: string) {
     console.warn(val)
     this.route.navigate([`/search/${val}`]);
   }
 
-  clear(){
-    this.cartItems=0;
+  clear() {
+    this.cartItems = 0;
   }
 }
 

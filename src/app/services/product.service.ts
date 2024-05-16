@@ -118,6 +118,5 @@ export class ProductService {
 
   cancelOrder(orderId: number) {
     return this.http.delete('http://localhost:8080/orders/' + orderId)
-
   }
 }

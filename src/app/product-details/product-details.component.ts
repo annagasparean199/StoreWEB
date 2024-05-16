@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { cart, product } from '../data-type';
 import { ProductService } from '../services/product.service';
+import {HeaderComponent} from "../header/header.component";
+import {defaultEquals} from "@angular/core/primitives/signals";
 
 @Component({
   selector: 'app-product-details',
@@ -90,4 +92,9 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.removeCart=false
   }
+
+    protected readonly HeaderComponent = HeaderComponent;
+  protected readonly localStorage = localStorage;
+  protected readonly defaultEquals = defaultEquals;
+  protected readonly Object = Object;
 }
